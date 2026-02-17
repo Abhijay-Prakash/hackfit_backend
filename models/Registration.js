@@ -15,28 +15,20 @@ const memberSchema = new mongoose.Schema({
 
 const registrationSchema = new mongoose.Schema(
   {
-    teamName: {
-      type: String,
-      required: true,
-    },
-    teamSize: {
-      type: Number,
-      required: true,
-    },
-    teamContact: {
-      type: String,
-      required: true,
-    },
-    amount: {
-      type: Number,
-      required: true,
-    },
+    teamSize: Number,
+    teamName: String,
+
     lead: memberSchema,
+
     members: [memberSchema],
-    paymentScreenshot: {
-      type: String, // Cloudinary URL
-      required: true,
+
+    payment: {
+      contact: String,
+      screenshotUrl: String,
     },
+
+    totalAmount: Number,
+    submittedAt: Date,
   },
   { timestamps: true }
 );

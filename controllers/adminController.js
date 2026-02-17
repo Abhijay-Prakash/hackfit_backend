@@ -1,6 +1,5 @@
 const Registration = require("../models/Registration");
 
-// GET ALL REGISTRATIONS (Admin)
 exports.getAllRegistrations = async (req, res) => {
   try {
     const { page = 1, limit = 10, search = "" } = req.query;
@@ -15,19 +14,19 @@ exports.getAllRegistrations = async (req, res) => {
     }
 
     const registrations = await Registration.find(query)
-      .sort({ createdAt: -1 }) // newest first
+      .sort({ createdAt: -1 })
       .skip((pageNumber - 1) * limitNumber)
       .limit(limitNumber);
 
-    const total = await Registration.countDocuments(query);
+    const totalTeams = await Registration.countDocuments(); // 👈 total teams registered
 
     res.status(200).json({
       success: true,
-      total,
+      totalTeams, // 👈 total teams in database
       currentPage: pageNumber,
-      totalPages: Math.ceil(total / limitNumber),
       data: registrations,
     });
+
   } catch (error) {
     console.error("Admin fetch error:", error);
     res.status(500).json({ message: "Server Error" });
