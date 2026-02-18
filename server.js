@@ -7,14 +7,32 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+
 app.use(express.json());
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://hackfit-2026.vercel.app/"
-];
+app.use(cors({
+  origin: [
+    'http://localhost:5173',           
+    'https://hackfit-2026.vercel.app', 
+    
+  ],
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE', 'PATCH'], // include what you need
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'x-api-key',                       
+  ],
+  credentials: false,                  
+  optionsSuccessStatus: 204,           
+}));
 
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    uptime: Math.round(process.uptime()),
+    timestamp: new Date().toISOString()
+  });
+});
 
 app.use("/api/registrations", require("./routes/registrationRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
