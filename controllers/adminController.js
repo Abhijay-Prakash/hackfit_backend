@@ -1,5 +1,7 @@
 const Registration = require("../models/Registration");
 const mongoose = require("mongoose");
+
+
 exports.getAllRegistrations = async (req, res) => {
   try {
     const { page = 1, limit = 10, search = "" } = req.query;
@@ -34,6 +36,8 @@ exports.getAllRegistrations = async (req, res) => {
 };
 
 
+
+
 exports.getRegistrationById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -55,8 +59,7 @@ exports.getRegistrationById = async (req, res) => {
       });
     }
 
-    // Optional: you can populate more fields if needed
-    // await registration.populate('someRefField');
+    
 
     res.status(200).json({
       success: true,
