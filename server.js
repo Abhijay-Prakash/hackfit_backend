@@ -14,6 +14,7 @@ app.use(cors({
   origin: [
     'http://localhost:5173',           
     'https://hackfit-2026.vercel.app', 
+    'https://hackfit-4-0.vercel.app',
     
   ],
   methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE', 'PATCH'], 
